@@ -18,7 +18,7 @@ import csv
 import sqlite3
 
 #database setup
-conn = sqlite3.connect("telemetry.db")
+conn = sqlite3.connect("data/telemetry.db")
 cursor = conn.cursor()
 
 cursor.execute("""
@@ -43,7 +43,7 @@ client.connect(("localhost", 9000))
 buffer = ""
 
 #create csv
-csv_file = open("vehicle-data-logger/data/telemetry_log.csv", "w", newline="")
+csv_file = open("data/telemetry_log.csv", "w", newline="")
 writer = csv.DictWriter(csv_file, fieldnames=["speed", "rpm", "fuel","lat", "lon", "throttle", "temp", "timestamp"])
 writer.writeheader()
 

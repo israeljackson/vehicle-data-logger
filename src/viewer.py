@@ -20,7 +20,7 @@ from matplotlib.animation import FuncAnimation
 import sqlite3
 
 #connect to database
-conn = sqlite3.connect("telemetry.db")
+conn = sqlite3.connect("data/telemetry.db")
 cursor = conn.cursor()
 
 query = """
@@ -71,7 +71,7 @@ for timestamp, speed, fuel, rpm, lat, lon, throttle, temp in line:
 df_range = pd.read_sql_query(query2, conn, params=(start_sql, stop_sql))
 opt = input("Do you wish to export ranged telemtry values into CSV? (Y/N) ").lower()
 if opt == 'y':
-    df_range.to_csv("vehicle-data-logger/data/time_ranged_telemtry.csv", index=False)
+    df_range.to_csv("data/time_ranged_telemtry.csv", index=False)
 
 #---------plot relevant telemetry with time----------
 df = pd.read_sql_query("SELECT * FROM telemetry ORDER BY timestamp ASC", conn)
@@ -105,7 +105,7 @@ ax[4].set_ylabel("Temperature(C)")
 
 plt.xlabel("Time(s)")
 plt.tight_layout()
-plt.savefig("vehicle-data-logger/data/telemetry_static_plot.png")
+plt.savefig("data/telemetry_static_plot.png")
 plt.show()
 
 #add live mode that shows the latest 500 rows ad refreshes every 200ms
